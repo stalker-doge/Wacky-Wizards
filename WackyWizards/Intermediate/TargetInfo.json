@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "WackyWizards",
+			"Path": "..\\Source\\WackyWizards.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "WackyWizardsEditor",
+			"Path": "..\\Source\\WackyWizardsEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
