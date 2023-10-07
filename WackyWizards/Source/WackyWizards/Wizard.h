@@ -23,6 +23,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	class UCameraComponent* FollowCamera;
 
+	void MoveX(float AxisValue);
+	void MoveY(float AxisValue);
+    void TurnCamera(float AxisValue);
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -34,5 +38,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override; 
+
 
 };

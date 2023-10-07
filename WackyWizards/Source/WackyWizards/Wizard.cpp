@@ -25,6 +25,20 @@ FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 FollowCamera->bUsePawnControlRotation = false;
 
 }
+void AWizard::MoveX(float AxisValue)
+{
+	AddMovementInput(GetActorForwardVector() * AxisValue);
+}
+
+void AWizard::MoveY(float AxisValue)
+{
+	AddMovementInput(GetActorRightVector() * AxisValue);
+}
+
+void AWizard::TurnCamera(float AxisValue)
+{
+	AddControllerYawInput(AxisValue);
+}
 
 // Called when the game starts or when spawned
 void AWizard::BeginPlay()
@@ -44,6 +58,11 @@ void AWizard::Tick(float DeltaTime)
 void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	InputComponent->BindAxis("MoveForward", this, &AWizard::MoveX);
+	InputComponent->BindAxis("MoveRight", this, &AWizard::MoveY);
+InputComponent->BindAxis("Turn", this, &AWizard::TurnCamera);
 
 }
+
+
 

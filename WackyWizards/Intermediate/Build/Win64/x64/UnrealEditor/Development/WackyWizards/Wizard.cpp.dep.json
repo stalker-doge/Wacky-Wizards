@@ -15,7 +15,15 @@
             "c:\\games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
             "c:\\games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
             "c:\\games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
-            "c:\\projects\\wacky-wizards\\wackywizards\\intermediate\\build\\win64\\unrealeditor\\inc\\wackywizards\\uht\\wizard.generated.h"
+            "c:\\projects\\wacky-wizards\\wackywizards\\intermediate\\build\\win64\\unrealeditor\\inc\\wackywizards\\uht\\wizard.generated.h",
+            "c:\\games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\components\\capsulecomponent.h",
+            "c:\\games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "c:\\games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
+            "c:\\games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\capsulecomponent.generated.h",
+            "c:\\games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\camera\\cameracomponent.h",
+            "c:\\games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\cameracomponent.generated.h",
+            "c:\\games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\gameframework\\springarmcomponent.h",
+            "c:\\games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\springarmcomponent.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
