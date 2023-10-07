@@ -7,6 +7,9 @@
 /IGNORE:4221
 /NODEFAULTLIB
 "C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\WackyWizardsEditor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
+"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\WackyWizards.init.gen.cpp.obj"
+"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Wizard.gen.cpp.obj"
 "C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\WackyWizards.cpp.obj"
+"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Wizard.cpp.obj"
 "C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Default.rc2.res"
 /OUT:"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\UnrealEditor-WackyWizards.lib"

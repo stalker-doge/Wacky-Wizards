@@ -6,14 +6,23 @@
 #include "GameFramework/Character.h"
 #include "Wizard.generated.h"
 
+
 UCLASS()
 class WACKYWIZARDS_API AWizard : public ACharacter
 {
 	GENERATED_BODY()
 
+
 public:
 	// Sets default values for this character's properties
 	AWizard();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	class USpringArmComponent* CameraBoom;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	class UCameraComponent* FollowCamera;
+
 
 protected:
 	// Called when the game starts or when spawned
