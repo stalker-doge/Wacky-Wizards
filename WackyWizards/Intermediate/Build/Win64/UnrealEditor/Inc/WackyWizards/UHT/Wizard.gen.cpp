@@ -107,15 +107,15 @@ void EmptyLinkFunctionForGeneratedCodeWizard() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AWizard);
 	AWizard::~AWizard() {}
-	struct Z_CompiledInDeferFile_FID_Projects_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_Statics
+	struct Z_CompiledInDeferFile_FID_TEST_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_Statics::ClassInfo[] = {
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TEST_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_AWizard, AWizard::StaticClass, TEXT("AWizard"), &Z_Registration_Info_UClass_AWizard, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWizard), 1561542171U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_392697166(TEXT("/Script/WackyWizards"),
-		Z_CompiledInDeferFile_FID_Projects_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TEST_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_392697166(TEXT("/Script/WackyWizards"),
+		Z_CompiledInDeferFile_FID_TEST_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TEST_Wacky_Wizards_WackyWizards_Source_WackyWizards_Wizard_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

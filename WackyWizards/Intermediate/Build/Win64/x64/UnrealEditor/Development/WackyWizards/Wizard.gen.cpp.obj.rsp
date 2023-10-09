@@ -1,11 +1,11 @@
-"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\UnrealEditor\Inc\WackyWizards\UHT\Wizard.gen.cpp"
-/FI"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\WackyWizardsEditor\Development\Engine\SharedPCH.Engine.Cpp20.h"
-/FI"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Definitions.WackyWizards.h"
-/Yu"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\WackyWizardsEditor\Development\Engine\SharedPCH.Engine.Cpp20.h"
-/Fp"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\WackyWizardsEditor\Development\Engine\SharedPCH.Engine.Cpp20.h.pch"
-/Fo"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Wizard.gen.cpp.obj"
-/sourceDependencies "C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Wizard.gen.cpp.dep.json"
-@"C:\Projects\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\WackyWizards.Shared.rsp"
+"C:\TEST\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\UnrealEditor\Inc\WackyWizards\UHT\Wizard.gen.cpp"
+/FI"C:\TEST\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\WackyWizardsEditor\Development\Engine\SharedPCH.Engine.Cpp20.h"
+/FI"C:\TEST\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Definitions.WackyWizards.h"
+/Yu"C:\TEST\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\WackyWizardsEditor\Development\Engine\SharedPCH.Engine.Cpp20.h"
+/Fp"C:\TEST\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\WackyWizardsEditor\Development\Engine\SharedPCH.Engine.Cpp20.h.pch"
+/Fo"C:\TEST\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Wizard.gen.cpp.obj"
+/sourceDependencies "C:\TEST\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\Wizard.gen.cpp.dep.json"
+@"C:\TEST\Wacky-Wizards\WackyWizards\Intermediate\Build\Win64\x64\UnrealEditor\Development\WackyWizards\WackyWizards.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi

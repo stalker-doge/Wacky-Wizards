@@ -1,11 +1,11 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\projects\\wacky-wizards\\wackywizards\\intermediate\\build\\win64\\unrealeditor\\inc\\wackywizards\\uht\\wackywizards.init.gen.cpp",
+        "Source": "c:\\test\\wacky-wizards\\wackywizards\\intermediate\\build\\win64\\unrealeditor\\inc\\wackywizards\\uht\\wackywizards.init.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "c:\\projects\\wacky-wizards\\wackywizards\\intermediate\\build\\win64\\x64\\wackywizardseditor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
+        "PCH": "c:\\test\\wacky-wizards\\wackywizards\\intermediate\\build\\win64\\x64\\wackywizardseditor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
         "Includes": [
-            "c:\\projects\\wacky-wizards\\wackywizards\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\wackywizards\\definitions.wackywizards.h"
+            "c:\\test\\wacky-wizards\\wackywizards\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\wackywizards\\definitions.wackywizards.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

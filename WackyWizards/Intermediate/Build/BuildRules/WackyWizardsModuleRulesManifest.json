@@ -1,8 +1,8 @@
 {
 	"SourceFiles": [
-		"C:\\Projects\\Wacky-Wizards\\WackyWizards\\Source\\WackyWizards\\WackyWizards.Build.cs",
-		"C:\\Projects\\Wacky-Wizards\\WackyWizards\\Source\\WackyWizards.Target.cs",
-		"C:\\Projects\\Wacky-Wizards\\WackyWizards\\Source\\WackyWizardsEditor.Target.cs"
+		"C:\\TEST\\Wacky-Wizards\\WackyWizards\\Source\\WackyWizards\\WackyWizards.Build.cs",
+		"C:\\TEST\\Wacky-Wizards\\WackyWizards\\Source\\WackyWizards.Target.cs",
+		"C:\\TEST\\Wacky-Wizards\\WackyWizards\\Source\\WackyWizardsEditor.Target.cs"
 	],
 	"EngineVersion": "5.3.1"
 }
