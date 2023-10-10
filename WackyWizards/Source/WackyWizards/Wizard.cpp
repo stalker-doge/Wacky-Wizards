@@ -40,6 +40,36 @@ void AWizard::TurnCamera(float AxisValue)
 	AddControllerYawInput(AxisValue);
 }
 
+void AWizard::MoveXPlayer2(float AxisValue)
+{
+	if (Player2->IsValidLowLevel())
+	{
+		Player2->MoveX(AxisValue);
+	}
+}
+
+void AWizard::MoveYPlayer2(float AxisValue)
+{
+	if (Player2->IsValidLowLevel())
+	{
+		Player2->MoveY(AxisValue);
+	}
+}
+
+void AWizard::ThrowBox()
+{
+	FVector SpawnLocation = GetActorLocation()* 50;
+	FRotator SpawnRotation = GetActorForwardVector().Rotation();
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	AActor* BoxSpawned = GetWorld()->SpawnActor<AActor>(Box, SpawnLocation, SpawnRotation, SpawnParams);
+	UStaticMeshComponent* StaticMesh = Cast<UStaticMeshComponent>(BoxSpawned->GetRootComponent());
+	FVector ForwardVector = GetActorForwardVector();
+	FVector ForceVector = ForwardVector * 1000.f;
+	StaticMesh->AddImpulse(ForceVector, NAME_None, true);
+	StaticMesh->SetEnableGravity(true);
+}
+
 // Called when the game starts or when spawned
 void AWizard::BeginPlay()
 {
@@ -51,7 +81,6 @@ void AWizard::BeginPlay()
 void AWizard::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -60,9 +89,9 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	InputComponent->BindAxis("MoveForward", this, &AWizard::MoveX);
 	InputComponent->BindAxis("MoveRight", this, &AWizard::MoveY);
-InputComponent->BindAxis("Turn", this, &AWizard::TurnCamera);
+
+	InputComponent->BindAxis("MoveForwardPlayer2", this, &AWizard::MoveXPlayer2);
+	InputComponent->BindAxis("MoveRightPlayer2", this, &AWizard::MoveYPlayer2);
+	InputComponent->BindAxis("Turn", this, &AWizard::TurnCamera);
 
 }
-
-
-

@@ -23,9 +23,20 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	class UCameraComponent* FollowCamera;
 
+	UPROPERTY(EditAnywhere, Category = "Player2")
+		AWizard* Player2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+		TSubclassOf<AActor> Box;
+
+
 	void MoveX(float AxisValue);
 	void MoveY(float AxisValue);
     void TurnCamera(float AxisValue);
+	void MoveXPlayer2(float AxisValue);
+	void MoveYPlayer2(float AxisValue);
+
+	void ThrowBox();
 
 
 protected:
