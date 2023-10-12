@@ -58,22 +58,20 @@ void AWizard::MoveYPlayer2(float AxisValue)
 
 void AWizard::ThrowBox()
 {
-	FVector SpawnLocation = GetActorLocation()* 50;
-	FRotator SpawnRotation = GetActorForwardVector().Rotation();
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = this;
-	AActor* BoxSpawned = GetWorld()->SpawnActor<AActor>(Box, SpawnLocation, SpawnRotation, SpawnParams);
-	UStaticMeshComponent* StaticMesh = Cast<UStaticMeshComponent>(BoxSpawned->GetRootComponent());
-	FVector ForwardVector = GetActorForwardVector();
-	FVector ForceVector = ForwardVector * 1000.f;
-	StaticMesh->AddImpulse(ForceVector, NAME_None, true);
-	StaticMesh->SetEnableGravity(true);
+
+}
+
+void AWizard::Respawn()
+{
+	SetActorLocation(SpawnLocation);
 }
 
 // Called when the game starts or when spawned
 void AWizard::BeginPlay()
 {
 	Super::BeginPlay();
+
+	SpawnLocation = GetActorLocation();
 	
 }
 

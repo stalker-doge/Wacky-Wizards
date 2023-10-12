@@ -1,3 +1,4 @@
+
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
@@ -27,7 +28,14 @@ public:
 		AWizard* Player2;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
-		TSubclassOf<AActor> Box;
+	float ThrowForce = 1000.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
+	FVector SpawnLocation;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	int lives = 3;
 
 
 	void MoveX(float AxisValue);
@@ -37,6 +45,8 @@ public:
 	void MoveYPlayer2(float AxisValue);
 
 	void ThrowBox();
+
+	void Respawn();
 
 
 protected:
