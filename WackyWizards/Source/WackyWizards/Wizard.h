@@ -5,6 +5,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Spell.h"
 #include "Wizard.generated.h"
 
 
@@ -18,12 +19,6 @@ public:
 	// Sets default values for this character's properties
 	AWizard();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-	class USpringArmComponent* CameraBoom;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-	class UCameraComponent* FollowCamera;
-
 	UPROPERTY(EditAnywhere, Category = "Player2")
 		AWizard* Player2;
 
@@ -33,9 +28,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
 	FVector SpawnLocation;
 
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
 	int lives = 3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+	TSubclassOf<ASpell> SpellClass;
+
 
 
 	void MoveX(float AxisValue);
@@ -44,7 +42,10 @@ public:
 	void MoveXPlayer2(float AxisValue);
 	void MoveYPlayer2(float AxisValue);
 
-	void ThrowBox();
+	UFUNCTION(BlueprintCallable, Category = "Powers")
+	void CastSpell();
+
+	void LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride);
 
 	void Respawn();
 

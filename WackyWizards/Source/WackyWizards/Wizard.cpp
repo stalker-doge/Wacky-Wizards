@@ -14,15 +14,7 @@ AWizard::AWizard()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-CameraBoom->SetupAttachment(GetCapsuleComponent());
-CameraBoom->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
-CameraBoom->TargetArmLength = 300.0f;
-CameraBoom->bUsePawnControlRotation = true;
 
-FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
-FollowCamera->bUsePawnControlRotation = false;
 
 }
 void AWizard::MoveX(float AxisValue)
@@ -56,10 +48,28 @@ void AWizard::MoveYPlayer2(float AxisValue)
 	}
 }
 
-void AWizard::ThrowBox()
+void AWizard::CastSpell()
 {
-
+	if (SpellClass)
+	{
+		//spawns the spell
+		FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100.0f;
+		FRotator SpawnRotation = GetActorRotation();
+		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
+		Spell->SetOwner(this);
+		Spell->SpellCast();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("SpellClass is not valid"));
+	}
 }
+
+void AWizard::LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)
+{
+	ACharacter::LaunchCharacter(LaunchVelocity, bXYOverride, bZOverride);
+}
+
 
 void AWizard::Respawn()
 {
@@ -71,7 +81,7 @@ void AWizard::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SpawnLocation = GetActorLocation();
+	SpawnLocation = GetActorLocation();// sets the spawn location to the location of the wizard at the start of the game
 	
 }
 
@@ -98,4 +108,5 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	InputComponent->BindAxis("Turn", this, &AWizard::TurnCamera);
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &AWizard::Jump);
+	InputComponent->BindAction("CastSpell", IE_Pressed, this, &AWizard::CastSpell);
 }
