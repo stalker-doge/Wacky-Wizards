@@ -48,6 +48,8 @@ public:
 
 	void Respawn();
 
+	void Jump();
+
 
 protected:
 	// Called when the game starts or when spawned

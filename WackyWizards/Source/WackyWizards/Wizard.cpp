@@ -81,6 +81,11 @@ void AWizard::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AWizard::Jump()
+{
+	ACharacter::Jump();
+}
+
 // Called to bind functionality to input
 void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -92,4 +97,5 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	InputComponent->BindAxis("MoveRightPlayer2", this, &AWizard::MoveYPlayer2);
 	InputComponent->BindAxis("Turn", this, &AWizard::TurnCamera);
 
+	InputComponent->BindAction("Jump", IE_Pressed, this, &AWizard::Jump);
 }
