@@ -57,7 +57,8 @@ void AWizard::CastSpell()
 		FRotator SpawnRotation = GetActorRotation();
 		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
 		Spell->SetOwner(this);
-		Spell->SpellCast();
+		Spell->GetMesh()->SetSimulatePhysics(true);
+		Spell->GetMesh()->AddImpulse(GetActorForwardVector() *	ThrowForce, NAME_None, true);
 	}
 	else
 	{

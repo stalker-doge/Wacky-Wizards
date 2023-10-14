@@ -17,6 +17,8 @@ ASpell::ASpell()
 	CollisionSphere->SetCollisionProfileName(TEXT("Trigger"));
 	CollisionSphere->SetGenerateOverlapEvents(true);
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+	CollisionSphere->OnComponentEndOverlap.AddDynamic(this, &ASpell::OnOverlapEnd);
+	RootComponent = CollisionSphere;
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(RootComponent);
@@ -34,15 +36,22 @@ void ASpell::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AAc
 		AWizard* Wizard = Cast<AWizard>(OtherActor);
 		if (Wizard->IsValidLowLevel())
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Wizard is valid"));
-			//pushes the player back
-			FVector LaunchDirection = Wizard->GetActorLocation() - GetActorLocation();
+			//pushes the wizard back
+			FVector LaunchDirection = GetActorForwardVector();
 			LaunchDirection.Normalize();
-			Wizard->LaunchCharacter(LaunchDirection * Knockback, true, true);
-			Destroy();
+			Wizard->LaunchCharacter(LaunchDirection * ThrowForce, true, true);
 		}
 	}
 
+}
+
+void ASpell::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	//destroys the spell when it stops colliding with a wizard
+	if (OtherActor->IsA(AWizard::StaticClass()))
+	{
+		Destroy();
+	}
 }
 
 void ASpell::SpellCast()
@@ -66,5 +75,11 @@ void ASpell::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//destroys the spell after a certain amount of time
+	lifeTime -= DeltaTime;
+	if (lifeTime <= 0)
+	{
+		Destroy();
+	}
 }
 
