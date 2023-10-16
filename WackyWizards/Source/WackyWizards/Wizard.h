@@ -45,7 +45,11 @@ public:
 
 	void LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride);
 
-	void CharacterKnockback(FVector LaunchVelocity, FVector LaunchDirection);
+	UCharacterMovementComponent* GetCharacterMovement() const;
+
+	void CharacterKnockback();
+
+	void AddMovement(FVector LaunchVelocity);
 
 	void Respawn();
 

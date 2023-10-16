@@ -4,6 +4,8 @@
 #include "Spell.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "WackyWizards/Wizard.h"
 
 // Sets default values
@@ -31,9 +33,10 @@ void ASpell::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AAc
 	AWizard* wizard = Cast<AWizard>(OtherActor);
 	if (wizard)
 	{
-
-		//wizard->Respawn();
-		wizard->LaunchCharacter(FVector(-1000, 0, 0), false, false);
+		//pushes the wizard back
+		FVector LaunchDirection = wizard->GetActorLocation() - GetActorLocation();
+		LaunchDirection.Normalize();
+		wizard->LaunchCharacter(LaunchDirection * Knockback, true, true);
 	}
 }
 

@@ -74,10 +74,23 @@ void AWizard::LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZO
 	ACharacter::LaunchCharacter(LaunchVelocity, bXYOverride, bZOverride);
 }
 
-void AWizard::CharacterKnockback(FVector LaunchVelocity, FVector LaunchDirection)
+UCharacterMovementComponent* AWizard::GetCharacterMovement() const
 {
-	//knockbacks the character when hit by a spell
+	//gets the character movement component
+	return ACharacter::GetCharacterMovement();
+}
 
+
+void AWizard::CharacterKnockback()
+{
+	LaunchCharacter(FVector(-1000, 0, 0), false, false);
+
+}
+
+void AWizard::AddMovement(FVector LaunchVelocity)
+{
+	//adds movement to the character
+	AddMovementInput(LaunchVelocity);
 }
 
 
