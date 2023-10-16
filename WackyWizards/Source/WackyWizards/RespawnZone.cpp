@@ -40,7 +40,8 @@ void ARespawnZone::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, cla
 	AWizard* wizard = Cast<AWizard>(OtherActor);
 	if (wizard)
 	{
-		wizard->Respawn();
+		//wizard->Respawn();
+		wizard->LaunchCharacter(FVector(-1000, 0, 0), false, false);
 	}
 }
 

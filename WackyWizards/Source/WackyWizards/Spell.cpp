@@ -19,8 +19,6 @@ ASpell::ASpell()
 	CollisionSphere->InitSphereRadius(50.0f);
 	CollisionSphere->SetCollisionProfileName(TEXT("Trigger"));
 	CollisionSphere->SetGenerateOverlapEvents(true);
-	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
-	CollisionSphere->OnComponentEndOverlap.AddDynamic(this, &ASpell::OnOverlapEnd);
 	RootComponent= CollisionSphere;
 	Mesh->SetupAttachment(RootComponent);
 }
@@ -30,26 +28,12 @@ void ASpell::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AAc
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) 
 {
 
-	if (OtherActor->IsA(AWizard::StaticClass()))
+	AWizard* wizard = Cast<AWizard>(OtherActor);
+	if (wizard)
 	{
-		AWizard* Wizard = Cast<AWizard>(OtherActor);
-		if (Wizard->IsValidLowLevel())
-		{
-			//pushes the wizard back
-			FVector LaunchDirection = GetActorForwardVector();
-			LaunchDirection.Normalize();
-			Wizard->LaunchCharacter(LaunchDirection * ThrowForce, true, true);
-		}
-	}
 
-}
-
-void ASpell::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-	//destroys the spell when it stops colliding with a wizard
-	if (OtherActor->IsA(AWizard::StaticClass()))
-	{
-		Destroy();
+		//wizard->Respawn();
+		wizard->LaunchCharacter(FVector(-1000, 0, 0), false, false);
 	}
 }
 
@@ -66,7 +50,7 @@ void ASpell::SpellCast()
 void ASpell::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
 }
 
 // Called every frame

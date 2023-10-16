@@ -15,7 +15,6 @@ AWizard::AWizard()
 	PrimaryActorTick.bCanEverTick = true;
 
 
-
 }
 void AWizard::MoveX(float AxisValue)
 {
@@ -70,7 +69,15 @@ void AWizard::CastSpell()
 
 void AWizard::LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)
 {
+	//launches the character backwards when hit by a spell
+	UE_LOG(LogTemp, Warning, TEXT("Hit"));
 	ACharacter::LaunchCharacter(LaunchVelocity, bXYOverride, bZOverride);
+}
+
+void AWizard::CharacterKnockback(FVector LaunchVelocity, FVector LaunchDirection)
+{
+	//knockbacks the character when hit by a spell
+
 }
 
 

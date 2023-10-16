@@ -34,8 +34,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	TSubclassOf<ASpell> SpellClass;
 
-
-
 	void MoveX(float AxisValue);
 	void MoveY(float AxisValue);
     void TurnCamera(float AxisValue);
@@ -46,6 +44,8 @@ public:
 	void CastSpell();
 
 	void LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride);
+
+	void CharacterKnockback(FVector LaunchVelocity, FVector LaunchDirection);
 
 	void Respawn();
 
