@@ -12,18 +12,17 @@ ASpell::ASpell()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	Mesh->SetSimulatePhysics(true);
+
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("Collision Sphere"));
 	CollisionSphere->InitSphereRadius(50.0f);
 	CollisionSphere->SetCollisionProfileName(TEXT("Trigger"));
 	CollisionSphere->SetGenerateOverlapEvents(true);
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
 	CollisionSphere->OnComponentEndOverlap.AddDynamic(this, &ASpell::OnOverlapEnd);
-	RootComponent = CollisionSphere;
-
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	RootComponent= CollisionSphere;
 	Mesh->SetupAttachment(RootComponent);
-	Mesh->SetSimulatePhysics(true);
-
 }
 
 

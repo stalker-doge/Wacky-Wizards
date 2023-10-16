@@ -58,6 +58,8 @@ void AWizard::CastSpell()
 		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
 		Spell->SetOwner(this);
 		Spell->GetMesh()->SetSimulatePhysics(true);
+		//sets the spell's location in front of the wizard
+		Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
 		Spell->GetMesh()->AddImpulse(GetActorForwardVector() *	ThrowForce, NAME_None, true);
 	}
 	else
