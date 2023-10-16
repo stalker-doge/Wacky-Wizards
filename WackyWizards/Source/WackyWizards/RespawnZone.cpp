@@ -41,6 +41,10 @@ void ARespawnZone::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, cla
 	if (wizard)
 	{
 		wizard->Respawn();
+		if (useLives)
+		{
+			wizard->lives--;
+		}
 	}
 }
 

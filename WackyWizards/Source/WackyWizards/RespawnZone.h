@@ -22,6 +22,9 @@ public:
 	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
+	bool useLives = false;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
