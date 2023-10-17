@@ -39,6 +39,9 @@ public:
     void TurnCamera(float AxisValue);
 	void MoveXPlayer2(float AxisValue);
 	void MoveYPlayer2(float AxisValue);
+	void TurnCameraPlayer2(float AxisValue);
+	void JumpPlayer2();
+	void CastSpellPlayer2();
 
 	UFUNCTION(BlueprintCallable, Category = "Powers")
 	void CastSpell();
