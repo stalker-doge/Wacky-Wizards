@@ -19,7 +19,7 @@ public:
 	// Sets default values for this character's properties
 	AWizard();
 
-	UPROPERTY(EditAnywhere, Category = "Player2")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Player2")
 		AWizard* Player2;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
