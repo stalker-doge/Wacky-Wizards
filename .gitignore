@@ -48,9 +48,11 @@ SourceArt/**/*.tga
 # Binary Files
 WackyWizards/Binaries/*
 Plugins/*/Binaries/*
+Binaries/*
 
 # Builds
 WackyWizards/Build/*
+Build/*
 
 # Whitelist PakBlacklist-<BuildConfiguration>.txt files
 !Build/*/
@@ -68,6 +70,7 @@ WackyWizards/Saved/*
 
 # Compiled source files for the engine to use
 WackyWizards/Intermediate/*
+Intermediate/*
 Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
