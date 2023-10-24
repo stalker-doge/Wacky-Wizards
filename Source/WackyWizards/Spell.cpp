@@ -28,27 +28,44 @@ ASpell::ASpell()
 
 void ASpell::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Hit Actor!"));
 	AWizard* wizard = Cast<AWizard>(OtherActor);
-if (wizard)
+	if (wizard)
 	{
-		SpellEffect(wizard);
+		UE_LOG(LogTemp, Warning, TEXT("Hit Wizard!"));
+		//pushes the wizard back in the direction of the spell
+		FVector LaunchDirection = GetActorForwardVector();
+		wizard->LaunchCharacter(LaunchDirection * Knockback, false, true);
+	}
+	Destroy();
+}
+
+void ASpell::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+
+	AWizard* wizard = Cast<AWizard>(OtherActor);
+	if (wizard)
+	{
+		//pushes the wizard back
+		FVector LaunchDirection = wizard->GetActorLocation() - GetActorLocation();
+		LaunchDirection.Normalize();
+		wizard->LaunchCharacter(LaunchDirection * Knockback, true, true);
 	}
 }
+
 
 void ASpell::SpellCast()
 {
 	//launches the spell forward
 	FVector LaunchDirection = GetActorForwardVector();
 	LaunchDirection.Normalize();
-	Mesh->AddImpulse(LaunchDirection * ThrowForce, NAME_None, true);
+	CollisionSphere->AddImpulse(LaunchDirection * ThrowForce, NAME_None, true);
 }
 
 void ASpell::SpellEffect(AWizard* wizard)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Some warning message") );
-	//pushes the wizard back in the direction of the spell
-	FVector LaunchDirection = GetActorForwardVector();
-	wizard->LaunchCharacter(LaunchDirection * Knockback, false, true);
+
 }
 
 
@@ -57,6 +74,7 @@ void ASpell::BeginPlay()
 {
 	Super::BeginPlay();
 	CollisionSphere->OnComponentHit.AddDynamic(this, &ASpell::OnHit);
+	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
 }
 
 // Called every frame
