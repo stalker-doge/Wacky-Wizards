@@ -41,6 +41,9 @@ public:
 	UFUNCTION()
 	void SpellCast();
 
+	UFUNCTION(BlueprintCallable)
+		void SpellEffect(class AWizard* wizard);
+
 	UStaticMeshComponent* GetMesh() { return Mesh; }
 
 protected:

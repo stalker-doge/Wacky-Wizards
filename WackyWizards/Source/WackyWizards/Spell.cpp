@@ -31,9 +31,7 @@ void ASpell::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveC
 	AWizard* wizard = Cast<AWizard>(OtherActor);
 if (wizard)
 	{
-		//pushes the wizard back in the direction of the spell
-		FVector LaunchDirection = GetActorForwardVector();
-		wizard->LaunchCharacter(LaunchDirection * Knockback, false, true);
+		SpellEffect(wizard);
 	}
 }
 
@@ -43,6 +41,14 @@ void ASpell::SpellCast()
 	FVector LaunchDirection = GetActorForwardVector();
 	LaunchDirection.Normalize();
 	Mesh->AddImpulse(LaunchDirection * ThrowForce, NAME_None, true);
+}
+
+void ASpell::SpellEffect(AWizard* wizard)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Some warning message") );
+	//pushes the wizard back in the direction of the spell
+	FVector LaunchDirection = GetActorForwardVector();
+	wizard->LaunchCharacter(LaunchDirection * Knockback, false, true);
 }
 
 
