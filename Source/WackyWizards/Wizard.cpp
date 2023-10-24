@@ -91,8 +91,7 @@ void AWizard::CastSpell()
 
 void AWizard::LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)
 {
-	//launches the character backwards when hit by a spell
-	UE_LOG(LogTemp, Warning, TEXT("Hit"));
+	//launches the character backwards when hit by a spel;
 	ACharacter::LaunchCharacter(LaunchVelocity, bXYOverride, bZOverride);
 }
 
