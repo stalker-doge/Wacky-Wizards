@@ -26,17 +26,14 @@ ASpell::ASpell()
 }
 
 
-void ASpell::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) 
+void ASpell::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-
 	AWizard* wizard = Cast<AWizard>(OtherActor);
-	if (wizard)
+if (wizard)
 	{
-		//pushes the wizard back
-		FVector LaunchDirection = wizard->GetActorLocation() - GetActorLocation();
-		LaunchDirection.Normalize();
-		wizard->LaunchCharacter(LaunchDirection * Knockback, true, true);
+		//pushes the wizard back in the direction of the spell
+		FVector LaunchDirection = GetActorForwardVector();
+		wizard->LaunchCharacter(LaunchDirection * Knockback, false, true);
 	}
 }
 
@@ -53,7 +50,7 @@ void ASpell::SpellCast()
 void ASpell::BeginPlay()
 {
 	Super::BeginPlay();
-	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+	CollisionSphere->OnComponentHit.AddDynamic(this, &ASpell::OnHit);
 }
 
 // Called every frame

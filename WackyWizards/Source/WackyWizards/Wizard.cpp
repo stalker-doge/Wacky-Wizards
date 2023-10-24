@@ -127,6 +127,7 @@ void AWizard::BeginPlay()
 	Super::BeginPlay();
 
 	SpawnLocation = GetActorLocation();// sets the spawn location to the location of the wizard at the start of the game
+
 	
 }
 

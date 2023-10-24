@@ -7,7 +7,7 @@
 		{
 			"Name": "WackyWizards",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
+			"LoadingPhase": "PreDefault",
 			"AdditionalDependencies": [
 				"Engine"
 			]
