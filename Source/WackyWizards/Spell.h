@@ -32,11 +32,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	float lifeTime = 5.0f;
-
-	UFUNCTION(BlueprintCallable)
-	void OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
-		FVector NormalImpulse, const FHitResult& Hit);
-
+	
 	UFUNCTION(BlueprintCallable)
 		void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -46,7 +42,7 @@ public:
 	void SpellCast();
 
 	UFUNCTION(BlueprintCallable)
-		void SpellEffect(class AWizard* wizard);
+		virtual void SpellEffect(class AWizard* wizard);
 
 	UStaticMeshComponent* GetMesh() { return Mesh; }
 

@@ -9,6 +9,6 @@ void APullSpell::SpellEffect(AWizard* wizard)
 	//pulls the wizard back
 	FVector LaunchDirection = wizard->GetActorLocation() - GetActorLocation();
 	LaunchDirection.Normalize();
-	wizard->LaunchCharacter(LaunchDirection * -Knockback, true, true);
+	wizard->LaunchCharacter(-LaunchDirection * Knockback, true, true);
 	Destroy();
 }

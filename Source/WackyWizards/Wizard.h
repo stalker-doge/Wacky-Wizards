@@ -19,8 +19,8 @@ public:
 	// Sets default values for this character's properties
 	AWizard();
 
-	//UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Player2")
-		//AWizard* Player2;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Player2")
+		AWizard* Player2;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	float ThrowForce = 1000.0f;
@@ -37,11 +37,11 @@ public:
 	void MoveX(float AxisValue);
 	void MoveY(float AxisValue);
     void TurnCamera(float AxisValue);
-	//void MoveXPlayer2(float AxisValue);
-	//void MoveYPlayer2(float AxisValue);
-	//void TurnCameraPlayer2(float AxisValue);
-	//void JumpPlayer2();
-	//void CastSpellPlayer2();
+	void MoveXPlayer2(float AxisValue);
+	void MoveYPlayer2(float AxisValue);
+	void TurnCameraPlayer2(float AxisValue);
+	void JumpPlayer2();
+	void CastSpellPlayer2();
 
 	UFUNCTION(BlueprintCallable, Category = "Powers")
 	void CastSpell();
@@ -54,7 +54,11 @@ public:
 
 	void AddMovement(FVector LaunchVelocity);
 
+	UFUNCTION(BlueprintCallable)
 	void Respawn();
+
+	UFUNCTION(BlueprintCallable)
+		void RespawnAt(FVector RespawnPosition);
 
 	void Jump();
 
