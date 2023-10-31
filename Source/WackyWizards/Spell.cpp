@@ -11,7 +11,7 @@
 // Sets default values
 ASpell::ASpell()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
@@ -25,20 +25,6 @@ ASpell::ASpell()
 	Mesh->SetupAttachment(CollisionSphere);
 }
 
-
-void ASpell::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
-	UE_LOG(LogTemp, Warning, TEXT("Hit"));
-	AWizard* wizard = Cast<AWizard>(OtherActor);
-	if (wizard)
-	{
-
-		//pushes the wizard back in the direction of the spell
-		FVector LaunchDirection = GetActorForwardVector();
-		wizard->LaunchCharacter(LaunchDirection * Knockback, false, true);
-	}
-}
-
 void ASpell::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -46,11 +32,7 @@ void ASpell::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AAc
 	if (wizard)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Hit!"));
-		//pushes the wizard back
-		FVector LaunchDirection = wizard->GetActorLocation() - GetActorLocation();
-		LaunchDirection.Normalize();
-		wizard->LaunchCharacter(LaunchDirection * Knockback, true, true);
-		Destroy();
+		SpellEffect(wizard);
 	}
 }
 
@@ -65,15 +47,17 @@ void ASpell::SpellCast()
 
 void ASpell::SpellEffect(AWizard* wizard)
 {
-
+	//pushes the wizard back
+	FVector LaunchDirection = wizard->GetActorLocation() - GetActorLocation();
+	LaunchDirection.Normalize();
+	wizard->LaunchCharacter(LaunchDirection * Knockback, true, true);
+	Destroy();
 }
-
 
 // Called when the game starts or when spawned
 void ASpell::BeginPlay()
 {
 	Super::BeginPlay();
-	//CollisionSphere->OnComponentHit.AddDynamic(this, &ASpell::OnHit);
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
 }
 
