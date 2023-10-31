@@ -77,4 +77,8 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+<<<<<<< HEAD
 Burn Down Charts/~$Lucian Burn Down Chart.xlsx
+=======
+Burn Down Charts/~$Ben.P Burn Down Chart.xlsx
+>>>>>>> a67d605b1bb226c5749d502b3678e9c0fb8a3535
