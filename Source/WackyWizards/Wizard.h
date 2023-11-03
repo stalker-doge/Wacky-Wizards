@@ -19,8 +19,6 @@ public:
 	// Sets default values for this character's properties
 	AWizard();
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Player2")
-		AWizard* Player2;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	float ThrowForce = 1000.0f;
@@ -31,17 +29,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
 	int lives = 3;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	bool isSlowed = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	TSubclassOf<ASpell> SpellClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
+	int PlayerNumber = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
+	float maxSpeed = 600.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
+	float slowSpeed = 300.0f;
 
 	void MoveX(float AxisValue);
 	void MoveY(float AxisValue);
     void TurnCamera(float AxisValue);
-	void MoveXPlayer2(float AxisValue);
-	void MoveYPlayer2(float AxisValue);
-	void TurnCameraPlayer2(float AxisValue);
-	void JumpPlayer2();
-	void CastSpellPlayer2();
 
 	UFUNCTION(BlueprintCallable, Category = "Powers")
 	void CastSpell();
@@ -61,6 +66,12 @@ public:
 		void RespawnAt(FVector RespawnPosition);
 
 	void Jump();
+
+	UFUNCTION(BlueprintCallable)
+		void Slow();
+
+	UFUNCTION(BlueprintCallable)
+	void UnSlow();
 
 
 protected:

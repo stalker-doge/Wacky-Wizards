@@ -4,6 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/SphereComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Spell.generated.h"
 
 UCLASS()
@@ -38,8 +42,9 @@ public:
 			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 
+
 	UFUNCTION()
-	void SpellCast();
+	virtual void SpellCast();
 
 	UFUNCTION(BlueprintCallable)
 		virtual void SpellEffect(class AWizard* wizard);

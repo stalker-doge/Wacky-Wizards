@@ -2,10 +2,6 @@
 
 
 #include "Spell.h"
-#include "Components/SphereComponent.h"
-#include "Components/StaticMeshComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
-#include "Kismet/GameplayStatics.h"
 #include "WackyWizards/Wizard.h"
 
 // Sets default values
