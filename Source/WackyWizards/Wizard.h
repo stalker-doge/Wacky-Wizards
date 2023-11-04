@@ -44,6 +44,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
 	bool isOnSlipperyGround = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	float slipForce = 100.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	TSubclassOf<ASpell> SpellClass;
 

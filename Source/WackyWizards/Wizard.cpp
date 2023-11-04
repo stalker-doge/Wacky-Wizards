@@ -144,6 +144,16 @@ void AWizard::Tick(float DeltaTime)
 		}
 	}
 
+	//while the wizard is on slippery ground, it will keep sliding
+	if (isOnSlipperyGround)
+	{
+		//gets the current velocity of the wizard
+	FVector currentVelocity = GetCharacterMovement()->Velocity;
+	//adds a force to the wizard to keep it moving
+	GetCharacterMovement()->AddForce(currentVelocity * slipForce);
+	}
+
+
 }
 
 void AWizard::Jump()
