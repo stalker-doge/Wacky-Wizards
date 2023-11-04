@@ -37,11 +37,17 @@ AWizard::AWizard()
 }
 void AWizard::MoveX(float AxisValue)
 {
-	AddMovementInput(GetActorForwardVector() * AxisValue);
+	if(reverseControls)
+	AddMovementInput(GetActorForwardVector() * -AxisValue);
+	else
+		AddMovementInput(GetActorForwardVector() * AxisValue);
 }
 
 void AWizard::MoveY(float AxisValue)
 {
+	if (reverseControls)
+		AddMovementInput(GetActorRightVector() * -AxisValue);
+	else
 	AddMovementInput(GetActorRightVector() * AxisValue);
 }
 
@@ -128,7 +134,16 @@ void AWizard::Tick(float DeltaTime)
 	else
 		GetCharacterMovement()->MaxWalkSpeed = maxSpeed;
 
-	UE_LOG(LogTemp, Warning, TEXT("Speed: %f"), GetCharacterMovement()->MaxWalkSpeed);
+	if (reverseControls)
+	{
+		reverseControlsTimer += DeltaTime;
+		if (reverseControlsTimer >= reverseControlsTimerMax)
+		{
+			reverseControls = false;
+			reverseControlsTimer = 0;
+		}
+	}
+
 }
 
 void AWizard::Jump()
@@ -144,6 +159,21 @@ void AWizard::Slow()
 void AWizard::UnSlow()
 {
 	isSlowed = false;
+}
+
+void AWizard::SlipperyGround()
+{
+	isOnSlipperyGround = true;
+}
+
+void AWizard::UnSlipperyGround()
+{
+	isOnSlipperyGround = false;
+}
+
+void AWizard::ReverseControls()
+{
+	reverseControls = true;
 }
 
 // Called to bind functionality to input

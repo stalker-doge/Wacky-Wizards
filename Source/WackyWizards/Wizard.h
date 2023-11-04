@@ -32,6 +32,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
 	bool isSlowed = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	bool reverseControls = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	float reverseControlsTimer = 0.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	float reverseControlsTimerMax = 3.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	bool isOnSlipperyGround = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	TSubclassOf<ASpell> SpellClass;
 
@@ -72,6 +84,15 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void UnSlow();
+
+	UFUNCTION(BlueprintCallable)
+	void SlipperyGround();
+
+	UFUNCTION(BlueprintCallable)
+	void UnSlipperyGround();
+
+	UFUNCTION(BlueprintCallable)
+		void ReverseControls();
 
 
 protected:
