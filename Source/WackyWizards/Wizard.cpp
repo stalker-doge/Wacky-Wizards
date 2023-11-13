@@ -174,26 +174,18 @@ void AWizard::Move(const FInputActionValue& Value)
 {
 	if (Controller != nullptr)
 	{
-		const FVector2D MoveValue = Value.Get<FVector2D>();
-		const FRotator MovementRotation(0, Controller->GetControlRotation().Yaw, 0);
+		//moves the wizard in absolute directions, ignoring the direction the wizard is facing
 
-		// Forward/Backward direction
-		if (MoveValue.Y != 0.f)
-		{
-			// Get forward vector
-			const FVector Direction = MovementRotation.RotateVector(FVector::ForwardVector);
-
-			AddMovementInput(Direction, MoveValue.Y);
-		}
-
-		// Right/Left direction
+        const FVector2D MoveValue = Value.Get<FVector2D>();
 		if (MoveValue.X != 0.f)
 		{
-			// Get right vector
-			const FVector Direction = MovementRotation.RotateVector(FVector::RightVector);
-
-			AddMovementInput(Direction, MoveValue.X);
+			AddMovementInput(FVector(0.f, 1.f, 0.f), MoveValue.X);
 		}
+		if (MoveValue.Y != 0.f)
+		{
+			AddMovementInput(FVector(1.f, 0.f, 0.f), MoveValue.Y);
+		}
+
 	}
 }
 
@@ -242,4 +234,6 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	// Bind the actions
 	PEI->BindAction(InputActions->InputMove, ETriggerEvent::Triggered, this, &AWizard::Move);
 	PEI->BindAction(InputActions->InputTurn, ETriggerEvent::Triggered, this, &AWizard::Turn);
+	PEI->BindAction(InputActions->InputCastSpell, ETriggerEvent::Triggered, this, &AWizard::CastSpell);
+	PEI->BindAction(InputActions->InputWizardJump, ETriggerEvent::Triggered, this, &AWizard::Jump);
 }

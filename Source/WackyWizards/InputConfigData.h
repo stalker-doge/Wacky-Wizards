@@ -21,5 +21,11 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	UInputAction* InputTurn;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* InputCastSpell;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* InputWizardJump;
 	
 };
