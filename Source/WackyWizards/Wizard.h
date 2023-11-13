@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Spell.h"
+#include "InputActionValue.h"
 #include "Wizard.generated.h"
 
 
@@ -97,10 +98,22 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void ReverseControls();
 
+		// Handle move input
+		void Move(const FInputActionValue& Value);
+
+		// Handle look input
+		void Turn(const FInputActionValue& Value);
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputMappingContext* InputMapping;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputConfigData* InputActions;
 
 public:	
 	// Called every frame

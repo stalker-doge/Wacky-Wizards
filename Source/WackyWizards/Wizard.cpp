@@ -6,6 +6,10 @@
 #include "Components/CapsuleComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "InputMappingContext.h"
+#include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
+#include "InputConfigData.h"
 
 
 // Sets default values
@@ -13,26 +17,6 @@ AWizard::AWizard()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	//assings an available controller to the wizard
-	switch (PlayerNumber)
-	{
-		case 0:
-			AutoPossessPlayer = EAutoReceiveInput::Player0;
-			break;
-
-		case 1:
-			AutoPossessPlayer = EAutoReceiveInput::Player1;
-			break;
-
-		case 2:
-			AutoPossessPlayer = EAutoReceiveInput::Player2;
-			break;
-
-		case 3:
-			AutoPossessPlayer = EAutoReceiveInput::Player3;
-			break;
-	}
 
 }
 void AWizard::MoveX(float AxisValue)
@@ -186,15 +170,76 @@ void AWizard::ReverseControls()
 	reverseControls = true;
 }
 
+void AWizard::Move(const FInputActionValue& Value)
+{
+	if (Controller != nullptr)
+	{
+		const FVector2D MoveValue = Value.Get<FVector2D>();
+		const FRotator MovementRotation(0, Controller->GetControlRotation().Yaw, 0);
+
+		// Forward/Backward direction
+		if (MoveValue.Y != 0.f)
+		{
+			// Get forward vector
+			const FVector Direction = MovementRotation.RotateVector(FVector::ForwardVector);
+
+			AddMovementInput(Direction, MoveValue.Y);
+		}
+
+		// Right/Left direction
+		if (MoveValue.X != 0.f)
+		{
+			// Get right vector
+			const FVector Direction = MovementRotation.RotateVector(FVector::RightVector);
+
+			AddMovementInput(Direction, MoveValue.X);
+		}
+	}
+}
+
+void AWizard::Turn(const FInputActionValue& Value)
+{
+	if (Controller != nullptr)
+	{
+		const FVector2D LookValue = Value.Get<FVector2D>();
+
+		if (LookValue.X != 0.f)
+		{
+			AddControllerYawInput(LookValue.X);
+		}
+
+		if (LookValue.Y != 0.f)
+		{
+			AddControllerPitchInput(LookValue.Y);
+		}
+	}
+}
+
 // Called to bind functionality to input
 void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	InputComponent->BindAxis("MoveForward", this, &AWizard::MoveX);
-	InputComponent->BindAxis("MoveRight", this, &AWizard::MoveY);
+	//Super::SetupPlayerInputComponent(PlayerInputComponent);
+	//InputComponent->BindAxis("MoveForward", this, &AWizard::MoveX);
+	//InputComponent->BindAxis("MoveRight", this, &AWizard::MoveY);
 
-	InputComponent->BindAxis("Turn", this, &AWizard::TurnCamera);
+	//InputComponent->BindAxis("Turn", this, &AWizard::TurnCamera);
 
-	InputComponent->BindAction("Jump", IE_Pressed, this, &AWizard::Jump);
-	InputComponent->BindAction("CastSpell", IE_Pressed, this, &AWizard::CastSpell);
+	//InputComponent->BindAction("Jump", IE_Pressed, this, &AWizard::Jump);
+	//InputComponent->BindAction("CastSpell", IE_Pressed, this, &AWizard::CastSpell);
+
+	// Get the player controller
+	APlayerController* PC = Cast<APlayerController>(GetController());
+
+	//Get the local player subsystem
+	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer());
+
+	//Clear out the existing mappings, and add our mapping
+	Subsystem->ClearAllMappings();
+	Subsystem->AddMappingContext(InputMapping, 0);
+
+	//Get the Enhanced Input Component
+	UEnhancedInputComponent* PEI = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+	// Bind the actions
+	PEI->BindAction(InputActions->InputMove, ETriggerEvent::Triggered, this, &AWizard::Move);
+	PEI->BindAction(InputActions->InputTurn, ETriggerEvent::Triggered, this, &AWizard::Turn);
 }
