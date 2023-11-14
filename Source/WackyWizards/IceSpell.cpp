@@ -39,7 +39,7 @@ void AIceSpell::Tick(float DeltaTime)
 		//puts a rayscan to the ground 
 		FHitResult hit;
 		FVector start = GetActorLocation();
-		FVector end = GetActorLocation() - FVector(0, 0, 1000);
+		FVector end = GetActorLocation() - FVector(0, 0, 100);
 		FCollisionQueryParams traceParams;
 		traceParams.AddIgnoredActor(this);
 		//if it hits an ice trail, it will destroy the ice trail
@@ -53,7 +53,7 @@ void AIceSpell::Tick(float DeltaTime)
 		}
 		GetWorld()->LineTraceSingleByChannel(hit, start, end, ECC_Visibility, traceParams);
         //spawns the ice trail
-		FVector spawnLocation = hit.ImpactPoint + FVector(0, 0, 1);
+		FVector spawnLocation = hit.ImpactPoint + FVector(0, 0, 2);
 		AIceTrail* iceTrail = GetWorld()->SpawnActor<AIceTrail>(IceTrailClass, spawnLocation, GetActorRotation());
 		spawnTimer = 0.0f;
 	}
