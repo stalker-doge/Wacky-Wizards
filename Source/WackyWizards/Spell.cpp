@@ -27,11 +27,15 @@ void ASpell::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AAc
 	AWizard* wizard = Cast<AWizard>(OtherActor);
 	if (wizard)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit!"));
 		SpellEffect(wizard);
 	}
 }
 
+
+float ASpell::GetCooldown()
+{
+	return cooldown;
+}
 
 void ASpell::SpellCast()
 {

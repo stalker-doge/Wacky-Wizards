@@ -46,17 +46,22 @@ void AWizard::CastSpell()
 {
 	if (SpellClass)
 	{
-		//spawns the spell
-		FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100.0f;
-		FRotator SpawnRotation = GetActorRotation();
-		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
-		if (Spell->IsValidLowLevel())
+		if (canCastSpell1)
 		{
-			Spell->SetOwner(this);
-			Spell->GetMesh()->SetSimulatePhysics(true);
-			//sets the spell's location in front of the wizard
-			Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
-			Spell->GetMesh()->AddImpulse(GetActorForwardVector() * ThrowForce, NAME_None, true);
+
+			//spawns the spell
+			FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100.0f;
+			FRotator SpawnRotation = GetActorRotation();
+			ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
+			if (Spell->IsValidLowLevel())
+			{
+				//Spell->SetOwner(this);
+				Spell->GetMesh()->SetSimulatePhysics(true);
+				//sets the spell's location in front of the wizard
+				Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
+				Spell->GetMesh()->AddImpulse(GetActorForwardVector() * ThrowForce, NAME_None, true);
+				canCastSpell1 = false;
+			}
 		}
 	}
 	else
@@ -69,17 +74,21 @@ void AWizard::CastSpell2()
 {
 	if (SpellClass2)
 	{
-		//spawns the spell
-		FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100.0f;
-		FRotator SpawnRotation = GetActorRotation();
-		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass2, spellSpawnLocation, SpawnRotation);
-		if (Spell->IsValidLowLevel())
+		if (canCastSpell2)
 		{
-			Spell->SetOwner(this);
-			Spell->GetMesh()->SetSimulatePhysics(true);
-			//sets the spell's location in front of the wizard
-			Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
-			Spell->GetMesh()->AddImpulse(GetActorForwardVector() * ThrowForce, NAME_None, true);
+			//spawns the spell
+			FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100.0f;
+			FRotator SpawnRotation = GetActorRotation();
+			ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass2, spellSpawnLocation, SpawnRotation);
+			if (Spell->IsValidLowLevel())
+			{
+				Spell->SetOwner(this);
+				Spell->GetMesh()->SetSimulatePhysics(true);
+				//sets the spell's location in front of the wizard
+				Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
+				Spell->GetMesh()->AddImpulse(GetActorForwardVector() * ThrowForce, NAME_None, true);
+				canCastSpell2 = false;
+			}
 		}
 	}
 	else
@@ -163,7 +172,8 @@ void AWizard::Tick(float DeltaTime)
 	GetCharacterMovement()->AddForce(currentVelocity * slipForce);
 	}
 
-
+	spelltimer1 += DeltaTime;
+	spelltimer2 += DeltaTime;
 }
 
 void AWizard::Jump()

@@ -24,6 +24,22 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	float ThrowForce = 1000.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+		float spelltimer1 = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+		float spelltimer2 = 0.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+		float spellcooldown1 = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+		float spellcooldown2 = 0.0f;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+		bool canCastSpell1 = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+		bool canCastSpell2 = true;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
 	FVector SpawnLocation;
 
@@ -46,13 +62,13 @@ public:
 	bool isOnSlipperyGround = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
-	float slipForce = 100.0f;
+	float slipForce = 2200.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	TSubclassOf<ASpell> SpellClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
-		TSubclassOf<ASpell> SpellClass2;
+		TSubclassOf<ASpell>  SpellClass2;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")

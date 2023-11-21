@@ -36,12 +36,17 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	float lifeTime = 5.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	float cooldown = 3.0f;
 	
 	UFUNCTION(BlueprintCallable)
 		void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 
+	UFUNCTION()
+		float GetCooldown();
 
 	UFUNCTION()
 	virtual void SpellCast();
