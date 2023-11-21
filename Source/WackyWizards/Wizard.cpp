@@ -18,6 +18,7 @@ AWizard::AWizard()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+
 }
 void AWizard::MoveX(float AxisValue)
 {
@@ -139,7 +140,14 @@ void AWizard::BeginPlay()
 	Super::BeginPlay();
 
 	SpawnLocation = GetActorLocation();// sets the spawn location to the location of the wizard at the start of the game
-
+	FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100000.0f;
+	FRotator SpawnRotation = GetActorRotation();
+	ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
+	spellcooldown1 = Spell->GetCooldown();
+	ASpell* Spell2 = GetWorld()->SpawnActor<ASpell>(SpellClass2, spellSpawnLocation, SpawnRotation);
+	spellcooldown2 = Spell2->GetCooldown();
+	Spell->Destroy();
+	Spell2->Destroy();
 	
 }
 
@@ -174,6 +182,17 @@ void AWizard::Tick(float DeltaTime)
 
 	spelltimer1 += DeltaTime;
 	spelltimer2 += DeltaTime;
+
+	if (spelltimer1 >= spellcooldown1)
+	{
+		canCastSpell1 = true;
+		spelltimer1 = 0;
+	}
+	if (spelltimer2 >= spellcooldown2)
+	{
+		canCastSpell2 = true;
+		spelltimer2 = 0;
+	}
 }
 
 void AWizard::Jump()
