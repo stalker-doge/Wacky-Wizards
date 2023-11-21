@@ -50,11 +50,37 @@ void AWizard::CastSpell()
 		FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100.0f;
 		FRotator SpawnRotation = GetActorRotation();
 		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
-		Spell->SetOwner(this);
-		Spell->GetMesh()->SetSimulatePhysics(true);
-		//sets the spell's location in front of the wizard
-		Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
-		Spell->GetMesh()->AddImpulse(GetActorForwardVector() *	ThrowForce, NAME_None, true);
+		if (Spell->IsValidLowLevel())
+		{
+			Spell->SetOwner(this);
+			Spell->GetMesh()->SetSimulatePhysics(true);
+			//sets the spell's location in front of the wizard
+			Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
+			Spell->GetMesh()->AddImpulse(GetActorForwardVector() * ThrowForce, NAME_None, true);
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("SpellClass is not valid"));
+	}
+}
+
+void AWizard::CastSpell2()
+{
+	if (SpellClass2)
+	{
+		//spawns the spell
+		FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100.0f;
+		FRotator SpawnRotation = GetActorRotation();
+		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass2, spellSpawnLocation, SpawnRotation);
+		if (Spell->IsValidLowLevel())
+		{
+			Spell->SetOwner(this);
+			Spell->GetMesh()->SetSimulatePhysics(true);
+			//sets the spell's location in front of the wizard
+			Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
+			Spell->GetMesh()->AddImpulse(GetActorForwardVector() * ThrowForce, NAME_None, true);
+		}
 	}
 	else
 	{
@@ -235,5 +261,6 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PEI->BindAction(InputActions->InputMove, ETriggerEvent::Triggered, this, &AWizard::Move);
 	PEI->BindAction(InputActions->InputTurn, ETriggerEvent::Triggered, this, &AWizard::Turn);
 	PEI->BindAction(InputActions->InputCastSpell, ETriggerEvent::Triggered, this, &AWizard::CastSpell);
+	PEI->BindAction(InputActions->InputCast2ndSpell, ETriggerEvent::Triggered, this, &AWizard::CastSpell2);
 	PEI->BindAction(InputActions->InputWizardJump, ETriggerEvent::Triggered, this, &AWizard::Jump);
 }

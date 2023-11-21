@@ -51,6 +51,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 	TSubclassOf<ASpell> SpellClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+		TSubclassOf<ASpell> SpellClass2;
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
 	int PlayerNumber = 0;
 
@@ -66,6 +70,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Powers")
 	void CastSpell();
+
+	UFUNCTION(BlueprintCallable, Category = "Powers")
+		void CastSpell2();
 
 	void LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride);
 
