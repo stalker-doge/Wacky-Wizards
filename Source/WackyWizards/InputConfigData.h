@@ -30,5 +30,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 		UInputAction* InputCast2ndSpell;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+		UInputAction* InputInteract;
 	
 };
