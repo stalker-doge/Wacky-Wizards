@@ -127,6 +127,8 @@ public:
 		// Handle look input
 		void Turn(const FInputActionValue& Value);
 
+		UFUNCTION(BlueprintCallable)
+			void ChangeSpell(TSubclassOf<ASpell> NewSpell);
 
 protected:
 	// Called when the game starts or when spawned

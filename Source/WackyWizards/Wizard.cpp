@@ -142,13 +142,20 @@ void AWizard::BeginPlay()
 	SpawnLocation = GetActorLocation();// sets the spawn location to the location of the wizard at the start of the game
 	FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100000.0f;
 	FRotator SpawnRotation = GetActorRotation();
-	ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
-	spellcooldown1 = Spell->GetCooldown();
-	ASpell* Spell2 = GetWorld()->SpawnActor<ASpell>(SpellClass2, spellSpawnLocation, SpawnRotation);
-	spellcooldown2 = Spell2->GetCooldown();
-	Spell->Destroy();
-	Spell2->Destroy();
-	
+	if (SpellClass->IsValidLowLevelFast())
+	{
+		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
+		spellcooldown1 = Spell->GetCooldown();
+		Spell->Destroy();
+	}
+	if (SpellClass2->IsValidLowLevelFast())
+	{
+		ASpell* Spell2 = GetWorld()->SpawnActor<ASpell>(SpellClass2, spellSpawnLocation, SpawnRotation);
+		spellcooldown2 = Spell2->GetCooldown();
+		Spell2->Destroy();
+	}
+	canCastSpell2 = false;
+
 }
 
 // Called every frame
@@ -188,11 +195,6 @@ void AWizard::Tick(float DeltaTime)
 		canCastSpell1 = true;
 		spelltimer1 = 0;
 	}
-	if (spelltimer2 >= spellcooldown2)
-	{
-		canCastSpell2 = true;
-		spelltimer2 = 0;
-	}
 }
 
 void AWizard::Jump()
@@ -230,16 +232,31 @@ void AWizard::Move(const FInputActionValue& Value)
 	if (Controller != nullptr)
 	{
 		//moves the wizard in absolute directions, ignoring the direction the wizard is facing
+		if (!reverseControls)
+		{
+			const FVector2D MoveValue = Value.Get<FVector2D>();
+			if (MoveValue.X != 0.f)
+			{
+				AddMovementInput(FVector(0.f, 1.f, 0.f), MoveValue.X);
+			}
+			if (MoveValue.Y != 0.f)
+			{
+				AddMovementInput(FVector(1.f, 0.f, 0.f), MoveValue.Y);
+			}
+		}
+		else
+		{
+			const FVector2D MoveValue = Value.Get<FVector2D>();
+			if (MoveValue.X != 0.f)
+			{
+				AddMovementInput(FVector(0.f, -1.f, 0.f), MoveValue.X);
+			}
+			if (MoveValue.Y != 0.f)
+			{
+				AddMovementInput(FVector(-1.f, 0.f, 0.f), MoveValue.Y);
+			}
+		}
 
-        const FVector2D MoveValue = Value.Get<FVector2D>();
-		if (MoveValue.X != 0.f)
-		{
-			AddMovementInput(FVector(0.f, 1.f, 0.f), MoveValue.X);
-		}
-		if (MoveValue.Y != 0.f)
-		{
-			AddMovementInput(FVector(1.f, 0.f, 0.f), MoveValue.Y);
-		}
 
 	}
 }
@@ -260,6 +277,12 @@ void AWizard::Turn(const FInputActionValue& Value)
 			AddControllerPitchInput(LookValue.Y);
 		}
 	}
+}
+
+void AWizard::ChangeSpell(TSubclassOf<ASpell> NewSpell)
+{
+	SpellClass2 = NewSpell;
+	canCastSpell2 = true;
 }
 
 // Called to bind functionality to input
@@ -288,7 +311,7 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	UEnhancedInputComponent* PEI = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 	// Bind the actions
 	PEI->BindAction(InputActions->InputMove, ETriggerEvent::Triggered, this, &AWizard::Move);
-	PEI->BindAction(InputActions->InputTurn, ETriggerEvent::Triggered, this, &AWizard::Turn);
+	//PEI->BindAction(InputActions->InputTurn, ETriggerEvent::Triggered, this, &AWizard::Turn);
 	PEI->BindAction(InputActions->InputCastSpell, ETriggerEvent::Triggered, this, &AWizard::CastSpell);
 	PEI->BindAction(InputActions->InputCast2ndSpell, ETriggerEvent::Triggered, this, &AWizard::CastSpell2);
 	PEI->BindAction(InputActions->InputWizardJump, ETriggerEvent::Triggered, this, &AWizard::Jump);
