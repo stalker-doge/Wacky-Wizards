@@ -80,6 +80,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
 	float slowSpeed = 300.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
+		bool isZoneKing;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
+		int score;
+
+	UFUNCTION(BlueprintCallable, Category = "Zone")
+		void SetZoneKing(bool setZone);
+
+
 	void MoveX(float AxisValue);
 	void MoveY(float AxisValue);
     void TurnCamera(float AxisValue);

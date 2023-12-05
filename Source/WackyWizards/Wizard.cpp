@@ -20,6 +20,11 @@ AWizard::AWizard()
 
 
 }
+void AWizard::SetZoneKing(bool setZone)
+{
+	isZoneKing = setZone;
+	//UE_LOG(LogTemp, Warning, TEXT("The boolean value is %s"), (isZoneKing ? TEXT("true") : TEXT("false")));
+}
 void AWizard::MoveX(float AxisValue)
 {
 	if(reverseControls)
@@ -194,6 +199,12 @@ void AWizard::Tick(float DeltaTime)
 	{
 		canCastSpell1 = true;
 		spelltimer1 = 0;
+	}
+
+
+	if (isZoneKing)
+	{
+		score += 10;
 	}
 }
 
