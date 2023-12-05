@@ -15,6 +15,28 @@ public:
 	// Sets default values for this actor's properties
 	AKingOfTheHillZone();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
+		class UBoxComponent* zoneBox;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
+		class AWizard* currentKing;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
+		TArray<AWizard*> wizardsInZone;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
+		int playersInZone;
+
+
+	UFUNCTION(BlueprintCallable)
+		void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
+			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION(BlueprintCallable)
+		void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
+			int32 OtherBodyIndex);
+
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
