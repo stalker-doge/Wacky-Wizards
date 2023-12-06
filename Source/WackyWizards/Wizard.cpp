@@ -18,11 +18,6 @@ AWizard::AWizard()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	spellSpawnPoint = CreateDefaultSubobject<UBoxComponent>(TEXT("SpellSpawnPoint"));
-	spellSpawnPoint->SetupAttachment(GetMesh(), "SpellSpawnPoint");
-	spellSpawnPoint->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	spellSpawnPoint->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-
 }
 void AWizard::SetZoneKing(bool setZone)
 {
