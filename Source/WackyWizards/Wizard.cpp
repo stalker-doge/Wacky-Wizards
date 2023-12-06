@@ -22,7 +22,6 @@ AWizard::AWizard()
 	spellSpawnPoint->SetupAttachment(GetMesh(), "SpellSpawnPoint");
 	spellSpawnPoint->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	spellSpawnPoint->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-	spellSpawnPoint->SetupAttachment(RootComponent);
 
 }
 void AWizard::SetZoneKing(bool setZone)
