@@ -51,10 +51,22 @@ public:
 	UFUNCTION()
 	virtual void SpellCast();
 
+	UFUNCTION()
+	void SpellSideEffectCast();
+
 	UFUNCTION(BlueprintCallable)
 		virtual void SpellEffect(class AWizard* wizard);
 
 	UStaticMeshComponent* GetMesh() { return Mesh; }
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Side Effects")
+	float sideEffectChance = 10.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Side Effects")
+	TArray<TSubclassOf<class ASpell>> sideEffects;
+
+	UFUNCTION(BlueprintCallable)
+		virtual void SideEffect();
 
 protected:
 	// Called when the game starts or when spawned

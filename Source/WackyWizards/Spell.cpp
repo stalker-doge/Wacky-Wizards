@@ -39,10 +39,24 @@ float ASpell::GetCooldown()
 
 void ASpell::SpellCast()
 {
+	//calls a random number to determine if the spell will have a side effect
+	int random = FMath::RandRange(0, 100);
+	if (random <= sideEffectChance)
+	{
+		SideEffect();
+	}
 	//launches the spell forward
 	FVector LaunchDirection = GetActorForwardVector();
 	LaunchDirection.Normalize();
-	CollisionSphere->AddImpulse(LaunchDirection * ThrowForce, NAME_None, true);
+	Mesh->AddImpulse(LaunchDirection * ThrowForce, NAME_None, true);
+}
+
+void ASpell::SpellSideEffectCast()
+{
+	//launches the spell forward
+	FVector LaunchDirection = GetActorForwardVector();
+	LaunchDirection.Normalize();
+	Mesh->AddImpulse(LaunchDirection * ThrowForce, NAME_None, true);
 }
 
 void ASpell::SpellEffect(AWizard* wizard)
@@ -54,11 +68,24 @@ void ASpell::SpellEffect(AWizard* wizard)
 	Destroy();
 }
 
+void ASpell::SideEffect()
+{
+	//replaces the spell with a random side effect from the array
+    int random = FMath::RandRange(0, sideEffects.Num() - 1);
+	FActorSpawnParameters SpawnInfo;
+	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	ASpell* temp = GetWorld()->SpawnActor<ASpell>(sideEffects[random], GetActorLocation(), GetActorRotation(), SpawnInfo);
+	temp->SpellSideEffectCast();
+	Destroy();
+}
+
 // Called when the game starts or when spawned
 void ASpell::BeginPlay()
 {
 	Super::BeginPlay();
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+
+
 }
 
 // Called every frame
