@@ -30,12 +30,14 @@ void AKingOfTheHillZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AAc
 		if (playersInZone == 1)
 		{
 			//UE_LOG(LogTemp, Warning, TEXT("WHUH"));
+			//if the player entering the zone is the first player, set them to be the king
 			wizard->SetZoneKing(true);
 			wizardsInZone.AddUnique(wizard);
 			currentKing = wizard;
 		}
 		if (playersInZone > 1)
 		{
+			//if another player enters the zone, zone is contested and no one is king
 			currentKing->SetZoneKing(false);
 			wizardsInZone.AddUnique(wizard);
 		}
@@ -50,30 +52,34 @@ void AKingOfTheHillZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActo
 	if (wizard)
 	{
 		playersInZone--;
-		if (currentKing == wizard)
+		//if the player leaving the zone is the king, set the next player in the array to be the king
+	if (wizard == currentKing)
 		{
-			currentKing->SetZoneKing(false);
 			wizardsInZone.Remove(wizard);
-			if (playersInZone == 1)
+			if (wizardsInZone.Num() > 0)
 			{
-				wizardsInZone[0]->SetZoneKing(true);
 				currentKing = wizardsInZone[0];
+				currentKing->SetZoneKing(true);
 			}
+		}
+		else
+		{
+			wizardsInZone.Remove(wizard);
 		}
 	}
 }
 
-//// Called when the game starts or when spawned
-//void AKingOfTheHillZone::BeginPlay()
-//{
-//	Super::BeginPlay();
-//	
-//}
-//
-//// Called every frame
-//void AKingOfTheHillZone::Tick(float DeltaTime)
-//{
-//	Super::Tick(DeltaTime);
-//
-//}
+// Called when the game starts or when spawned
+void AKingOfTheHillZone::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
+// Called every frame
+void AKingOfTheHillZone::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
 
