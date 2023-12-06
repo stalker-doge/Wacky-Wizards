@@ -33,7 +33,8 @@ public:
 		float spellcooldown1 = 0.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 		float spellcooldown2 = 0.0f;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
+	class UBoxComponent* spellSpawnPoint;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Powers")
 		bool canCastSpell1 = true;

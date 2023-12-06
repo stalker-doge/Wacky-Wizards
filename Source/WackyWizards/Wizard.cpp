@@ -10,6 +10,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "InputConfigData.h"
+#include "Components/BoxComponent.h"
 
 
 // Sets default values
@@ -17,7 +18,11 @@ AWizard::AWizard()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	spellSpawnPoint = CreateDefaultSubobject<UBoxComponent>(TEXT("SpellSpawnPoint"));
+	spellSpawnPoint->SetupAttachment(GetMesh(), "SpellSpawnPoint");
+	spellSpawnPoint->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	spellSpawnPoint->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	spellSpawnPoint->SetupAttachment(RootComponent);
 
 }
 void AWizard::SetZoneKing(bool setZone)
@@ -55,8 +60,8 @@ void AWizard::CastSpell()
 		if (canCastSpell1)
 		{
 
-			//spawns the spell
-			FVector spellSpawnLocation = GetActorLocation() + GetActorForwardVector() * 100.0f;
+			//spawns the spell at the spell spawn point
+			FVector spellSpawnLocation = spellSpawnPoint->GetComponentLocation();
 			FRotator SpawnRotation = GetActorRotation();
 			ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
 			if (Spell->IsValidLowLevel())
@@ -66,6 +71,7 @@ void AWizard::CastSpell()
 				//sets the spell's location in front of the wizard
 				Spell->GetMesh()->SetWorldLocation(spellSpawnLocation);
 				Spell->GetMesh()->AddImpulse(GetActorForwardVector() * ThrowForce, NAME_None, true);
+				Spell->SpellCast();
 				canCastSpell1 = false;
 			}
 		}
@@ -152,12 +158,6 @@ void AWizard::BeginPlay()
 		ASpell* Spell = GetWorld()->SpawnActor<ASpell>(SpellClass, spellSpawnLocation, SpawnRotation);
 		spellcooldown1 = Spell->GetCooldown();
 		Spell->Destroy();
-	}
-	if (SpellClass2->IsValidLowLevelFast())
-	{
-		ASpell* Spell2 = GetWorld()->SpawnActor<ASpell>(SpellClass2, spellSpawnLocation, SpawnRotation);
-		spellcooldown2 = Spell2->GetCooldown();
-		Spell2->Destroy();
 	}
 	canCastSpell2 = false;
 
