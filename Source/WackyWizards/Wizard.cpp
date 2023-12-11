@@ -29,6 +29,14 @@ void AWizard::SetZoneKing(bool setZone)
 	isZoneKing = setZone;
 	//UE_LOG(LogTemp, Warning, TEXT("The boolean value is %s"), (isZoneKing ? TEXT("true") : TEXT("false")));
 }
+
+void AWizard::AddScore()
+{
+	if (isZoneKing)
+	{
+		score += 10;
+	}
+}
 void AWizard::MoveX(float AxisValue)
 {
 	if(reverseControls)
@@ -159,6 +167,9 @@ void AWizard::BeginPlay()
 		Spell->Destroy();
 	}
 	canCastSpell2 = false;
+
+	//creates a timer for the adding score function
+	GetWorldTimerManager().SetTimer(ScoreTimerHandle, this, &AWizard::AddScore, scoreLoopTime, true, scoreLoopTime);
 
 }
 

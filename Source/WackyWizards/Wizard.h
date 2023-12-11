@@ -87,8 +87,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
 		int score;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
+	FTimerHandle ScoreTimerHandle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Zone")
+	float scoreLoopTime = 1.0f;
+
 	UFUNCTION(BlueprintCallable, Category = "Zone")
 		void SetZoneKing(bool setZone);
+
+	UFUNCTION(BlueprintCallable, Category = "Zone")
+		void AddScore();
+
 
 
 	void MoveX(float AxisValue);
@@ -100,6 +110,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Powers")
 		void CastSpell2();
+
+
 
 	void LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride);
 
