@@ -145,6 +145,7 @@ void AWizard::AddMovement(FVector LaunchVelocity)
 void AWizard::Respawn()
 {
 	SetActorLocation(SpawnLocation);
+	this->GetMovementComponent()->Velocity.Set(0,0,0);
 }
 
 void AWizard::RespawnAt(FVector RespawnPosition)
