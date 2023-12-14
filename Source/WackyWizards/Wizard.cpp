@@ -211,12 +211,6 @@ void AWizard::Tick(float DeltaTime)
 		canCastSpell1 = true;
 		spelltimer1 = 0;
 	}
-
-
-	if (isZoneKing)
-	{
-		score += 10;
-	}
 }
 
 void AWizard::Jump()
